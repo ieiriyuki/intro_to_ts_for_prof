@@ -1,0 +1,12 @@
+services:
+  app:
+    image: "practice"
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: deploy
+    #volumes:
+    #  - .:/practice
+    stdin_open: true
+    tty: true
+    #command: ["bash"]
