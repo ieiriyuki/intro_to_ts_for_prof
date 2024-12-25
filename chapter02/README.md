@@ -20,3 +20,7 @@
         - unicode point: `"\u{1234}"`
     - `null`
     - `undefined`: どっちかっていうとこっち
+    - `bool`
+- type transformation
+- operand
+- control: if, else, {}, switch, while, for
