@@ -1,0 +1,12 @@
+services:
+  app:
+    image: "chapter3"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    stdin_open: true
+    tty: true
+    # command: ["npx", "tsc"]
+    command: ["bash"]
+    volumes:
+      - ./src:/practice/src
