@@ -18,7 +18,14 @@ const obj = {
         return num * 2
     }
 }
+```
 
 関数もオブジェクトの一種
 
 ## callback
+- map, filter, every, some, find
+
+## 関数型
+
+`(args) => type`
+
