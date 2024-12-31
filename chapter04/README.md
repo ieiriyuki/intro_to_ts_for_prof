@@ -32,6 +32,21 @@ const obj = {
 
 `(args) => type`
 
+## Generics
+```typescript
+function repeat<T>(element: T, length: number): T[] {
+    const result: T[] = []
+    for (let i = 0; i < length; i++) {
+        result.push(element)
+    }
+    return result
+}
+```
+
+## variable scope and function
+
+scoped in, function, block, module, global
+
 ## Others
 
 - 通常の型は, readonly 型の部分型
