@@ -1,0 +1,9 @@
+services:
+  app:
+    image: node:16.8.0-bullseye
+    working_dir: /practice
+    stdin_open: true
+    tty: true
+    command: ["bash"]
+    volumes:
+      - .:/practice
