@@ -25,3 +25,28 @@ const john: ReadOnlyUser = { name: 'john' }
 // john.name = 'uhyo' // error
 uhyoify(john) // pass, User2 として扱われている
 console.log(john) // changed!?
+
+// challenge
+console.log('challenge')
+for (const i of sequence(1, 100)) {
+    const message: string = getFizzBuzz(i)
+    console.log(message)
+}
+
+function* sequence(start: number, end: number): Generator<number> {
+    for (let i = start; i <= end; i++) {
+        yield i
+    }
+}
+
+function getFizzBuzz(i: number): string {
+    if (i % 15 === 0) {
+        return 'FizzBuzz'
+    } else if (i % 3 === 0) {
+        return 'Fizz'
+    } else if (i % 5 === 0) {
+        return 'Buzz'
+    } else {
+        return String(i)
+    }
+}
