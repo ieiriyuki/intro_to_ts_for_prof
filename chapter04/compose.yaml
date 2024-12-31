@@ -6,4 +6,4 @@ services:
     tty: true
     command: ["bash"]
     volumes:
-      - ./src:/practice
+      - .:/practice
