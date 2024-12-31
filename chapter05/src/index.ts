@@ -5,9 +5,10 @@ class User {
     readonly birthYear: number = 2000;
     static admin = 'admin';
     // accesisbility modifier
-    private privateProp: string = 'private'; // only accessible in the class
+    private privateProp: string = 'private'; // only accessible in the class, typescript only
     protected protectedProp: string = 'protected'; // accessible in the class and its subclasses
     public publicProp: string = 'public';
+    #foo: string = 'foo'; // private field, javascript spec
 
     // constructor
     constructor(name: string, age: number){
@@ -38,6 +39,7 @@ uhyo.name = 'uhyo';
 console.log(uhyo); // User { name: 'uhyo', age: 0 }
 console.log(User.getAdminName());
 console.log(uhyo.canAccessPrivateProp());
+// console.log(uhyo.#foo); // error
 
 class RefactoredUser {
     // can declare access modifier in constructor
@@ -52,3 +54,25 @@ class RefactoredUser {
 
 const uhyo2 = new RefactoredUser("uhyo", 1);
 console.log(uhyo2); // RefactoredUser { name: 'uhyo', age: 1 }
+
+// class expression
+// cannot use private, protected
+const UserClass = class {
+    name: string = '';
+}
+
+// static block
+console.log("start static block");
+class StaticBlock {
+    static {
+        console.log('static block');
+    }
+}
+console.log("end static block");
+
+// type arguments
+class GenericUser<T>{
+    constructor(public name: T){}
+}
+const genericUser = new GenericUser<number>(1); // can be inferred
+console.log(genericUser);
