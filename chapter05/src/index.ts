@@ -8,7 +8,7 @@ class User {
     private privateProp: string = 'private'; // only accessible in the class, typescript only
     protected protectedProp: string = 'protected'; // accessible in the class and its subclasses
     public publicProp: string = 'public';
-    #foo: string = 'foo'; // private field, javascript spec
+    #foo: string = 'foo'; // private field, javascript spec, namespace unique
 
     // constructor
     constructor(name: string, age: number){
@@ -53,13 +53,19 @@ class RefactoredUser {
 }
 
 const uhyo2 = new RefactoredUser("uhyo", 1);
-console.log(uhyo2); // RefactoredUser { name: 'uhyo', age: 1 }
+console.log("uhyo2", uhyo2); // RefactoredUser { name: 'uhyo', age: 1 }
+type RefactoredUserConstructor = new (name: string, age: number) => RefactoredUser;
+const createUser: RefactoredUserConstructor = RefactoredUser;
+const ru = new createUser("uhyo", 1);
+console.log("ru", ru);
 
 // class expression
 // cannot use private, protected
 const UserClass = class {
     name: string = '';
 }
+// 'UserClass' refers to a value, but is being used as a type here.
+// const john: UserClass = new UserClass();
 
 // static block
 console.log("start static block");
@@ -76,3 +82,18 @@ class GenericUser<T>{
 }
 const genericUser = new GenericUser<number>(1); // can be inferred
 console.log(genericUser);
+
+// instanceof
+console.log(genericUser instanceof GenericUser); // instance なので true
+const notGenericUser: GenericUser<number> = {name: 1};
+console.log(notGenericUser instanceof GenericUser); // type is same but not instance, so false
+
+// inherit
+class InheritedUser<T> extends GenericUser<T>{
+    // "noImplicitOverride": true requires override keyword
+    constructor(public override name: T, public age: number){
+        super(name); // necessary
+    }
+}
+const iu = new InheritedUser<number>(1, 1);
+console.log(iu);
