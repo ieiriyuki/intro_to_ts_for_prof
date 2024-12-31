@@ -50,3 +50,20 @@ function getFizzBuzz(i: number): string {
         return String(i)
     }
 }
+
+// challenge 2
+function map<T, U>(array: T[], callback: (arg: T) => U): U[] {
+    const result: U[] = []
+    for (const element of array) {
+        result.push(callback(element))
+    }
+    return result
+}
+
+const data = [1, -1, 2, -3, 5, 8, 13]
+const result = map(data, (x) => x * 10)
+console.log(result)
+const data2: string[] = ["a", "b", "c"]
+console.log(map(data2, (x) => x.toUpperCase()))
+const result2: boolean[] = map(data, (x) => x >= 0)
+console.log(result2)
