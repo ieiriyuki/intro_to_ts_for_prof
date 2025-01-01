@@ -97,3 +97,11 @@ type Name = (typeof foo)[number]
 - `arg is type`
 - `asserts arg is type`
 - much better than just using any because it is clear what developer should care
+
+## variadic tuple types
+
+## mapped types
+- `{ [P in K]: T}`
+- P: T の中で使用できる
+- K: プロパティになれる型
+- K というユニオン型の各構成要素 P に対して, P というプロパティが型 T を持つようなオブジェクトの型
