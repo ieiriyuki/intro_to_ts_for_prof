@@ -105,3 +105,8 @@ type Name = (typeof foo)[number]
 - P: T の中で使用できる
 - K: プロパティになれる型
 - K というユニオン型の各構成要素 P に対して, P というプロパティが型 T を持つようなオブジェクトの型
+
+## conditional types
+- `X extends Y ? S : T`
+- 型の条件分岐を行う
+- union distribution
