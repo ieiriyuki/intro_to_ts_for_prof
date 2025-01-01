@@ -149,16 +149,17 @@ throwError();
 console.log("challenge start");
 class MyUser {
     constructor(public name: string, public age: number){}
+
+    public getMessage(message: string): string {
+        return `${this.name} (${this.age}) "${message}"`;
+    }
 }
 function createMyUser(name: string, age: number): MyUser {
     if (name === '') {
         throw new Error('name is empty');
     }
-    return {name, age};
-}
-function getMessage(user: MyUser, message: string): string {
-    return `${user.name} (${user.age}) "${message}"`;
+    return new MyUser(name, age);
 }
 const mu = createMyUser("uhyo", 26);
-console.log(getMessage(mu, "hello"));
+console.log(mu.getMessage("hello"));
 console.log("challenge end");
