@@ -143,3 +143,23 @@ function throwError(): void {
     }
 }
 throwError();
+
+// challenge
+// to be refactored
+console.log("challenge start");
+type MyUser = {
+    name: string,
+    age: number,
+}
+function createMyUser(name: string, age: number): MyUser {
+    if (name === '') {
+        throw new Error('name is empty');
+    }
+    return {name, age};
+}
+function getMessage(user: MyUser, message: string): string {
+    return `${user.name} (${user.age}) "${message}"`;
+}
+const mu = createMyUser("uhyo", 26);
+console.log(getMessage(mu, "hello"));
+console.log("challenge end");
