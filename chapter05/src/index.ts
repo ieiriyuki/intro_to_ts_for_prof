@@ -70,8 +70,9 @@ const UserClass = class {
 // static block
 console.log("start static block");
 class StaticBlock {
+    static value = 999
     static {
-        console.log('static block');
+        console.log('static block', this.value);
     }
 }
 console.log("end static block");
@@ -97,3 +98,35 @@ class InheritedUser<T> extends GenericUser<T>{
 }
 const iu = new InheritedUser<number>(1, 1);
 console.log(iu);
+
+// this
+class ThisUser {
+    name: string;
+    #age: number;
+
+    constructor(name: string, age: number){
+        this.name = name;
+        this.#age = age;
+    }
+
+    public isAdult(): boolean{
+        return this.#age >= 20;
+    }
+
+    public filterOlder(users: readonly ThisUser[]): ThisUser[] {
+        return users.filter(u => u.#age > this.#age)
+    }
+}
+const vhyo = new ThisUser("vhyo", 20);
+const jane = new ThisUser("jane", 10);
+const bob = new ThisUser("bob", 30);
+const older = vhyo.filterOlder([jane, bob]);
+console.log(older);
+
+// apply
+const x = jane.isAdult.apply(bob, []);
+console.log(x)
+// bind
+const callable = bob.isAdult.bind(jane);
+console.log(callable());
+console.log(callable.call(bob));
