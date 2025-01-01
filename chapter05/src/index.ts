@@ -145,7 +145,7 @@ function throwError(): void {
 throwError();
 
 // challenge
-// to be refactored
+// became closure
 console.log("challenge start");
 function createMyUser(name: string, age: number): (message: string) => string {
     return (message: string) => {
