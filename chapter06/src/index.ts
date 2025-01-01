@@ -141,3 +141,43 @@ function func<M extends "string" | "number">(
 }
 func("string", "uhyo", "hyo")
 func("number", 1, 2, 3)
+
+// challenge
+{
+    console.log('challenge starts');
+    class Option<T extends unknown> { // Type で作るべき
+        type: string;
+        constructor(public value: T) {
+            this.type = value === null ? "null" : typeof value;
+        }
+    }
+    function mapOption<T, U>(
+        value: Option<T>,
+        func: (arg: T) => U,
+    ): Option<U> {
+        if (value.type === 'null' || value.type === 'undefined') {
+            return value as unknown as Option<U>;
+        }
+        return new Option(func(value.value));
+    }
+    const n: Option<number> = new Option(42);
+    const s: Option<string> = new Option('hello');
+    const b: Option<boolean> = new Option(true);
+    const o: Option<object> = new Option({});
+    const d: Option<undefined> = new Option(undefined);
+    const l: Option<null> = new Option(null);
+    function receiveOption<T>(value: Option<T>) {
+        console.log(value.type, value.value);
+    }
+    receiveOption(n);
+    receiveOption(mapOption(n, (v) => v + 1));
+    receiveOption(s);
+    receiveOption(mapOption(s, (v) => v + v));
+    receiveOption(b);
+    receiveOption(o);
+    receiveOption(d);
+    receiveOption(mapOption(d, () => 1));
+    receiveOption(l);
+    console.log(Option, typeof Option);
+    console.log('challenge ends');
+}
