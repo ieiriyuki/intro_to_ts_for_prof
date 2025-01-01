@@ -32,3 +32,17 @@ console.log(hello()) // this = undefined
 `Reflect.apply(func, obj, args)` もある, call はない
 
 `func.bind(obj)` で this を固定できる
+
+## error handling
+
+```typescript
+const e = new Error("message")
+try {
+    throw e
+} catch (err) {
+    //
+}
+
+// original error
+class MyError extends Error {}
+```
