@@ -130,3 +130,16 @@ console.log(x)
 const callable = bob.isAdult.bind(jane);
 console.log(callable());
 console.log(callable.call(bob));
+
+// error
+function throwError(): void {
+    try {
+        throw new Error("intentional error");
+    } catch (e) {
+        console.log(typeof e); // object
+        console.log("caught", e);
+    } finally {
+        console.log("finally");
+    }
+}
+throwError();
