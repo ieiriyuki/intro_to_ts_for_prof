@@ -147,9 +147,8 @@ throwError();
 // challenge
 // to be refactored
 console.log("challenge start");
-type MyUser = {
-    name: string,
-    age: number,
+class MyUser {
+    constructor(public name: string, public age: number){}
 }
 function createMyUser(name: string, age: number): MyUser {
     if (name === '') {
