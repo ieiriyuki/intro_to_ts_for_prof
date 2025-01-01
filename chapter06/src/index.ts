@@ -68,3 +68,8 @@ console.log(b_name);
 const b_spec = get(both, 'species');
 console.log(b_spec);
 // number 型は obj のキーになれるものの, ランタイムでは string なのでエラーを起こしうる
+
+// as const
+const foo = ["john", "bob", "taro"] as const
+type Name = (typeof foo)[number]
+{const name: Name = "john"}
