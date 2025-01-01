@@ -99,3 +99,34 @@ try {
 } finally {
     console.log('finally');
 }
+
+// variadic tuple types
+type StringNumberBooleans = [string, number, ...boolean[]];
+const a: StringNumberBooleans = ['hello', 42, true, false];
+// const b: StringNumberBooleans = ['hello', 'world']; // compile error
+type NumberStringNumber = [number, ...string[], number];
+const c: NumberStringNumber = [42, 'hello', 'world', 42];
+// can use once
+// optional elements are not after ...array
+type NSN = [number, string, number]
+type SNSNS = [string, ...NSN, string]
+// ...T[] 型変数を与えることはできるが, T extends readonly any[] を満たすことが必要
+
+// mapped types
+type Fruit = 'apple' | 'orange' | 'strawberry';
+type FruitNumbers = {
+    [P in Fruit]: number
+}
+const numbers1: FruitNumbers = {
+    apple: 5,
+    orange: 10,
+    strawberry: 15,
+}
+type FruitArrays = {
+    [P in Fruit]: P[]
+}
+const numbers2: FruitArrays = {
+    apple: ['apple', 'apple'],
+    orange: ['orange', 'orange', 'orange', 'orange', 'orange'],
+    strawberry: ['strawberry'],
+}
