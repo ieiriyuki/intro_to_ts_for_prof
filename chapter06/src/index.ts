@@ -73,3 +73,29 @@ console.log(b_spec);
 const foo = ["john", "bob", "taro"] as const
 type Name = (typeof foo)[number]
 {const name: Name = "john"}
+
+// user defined type guard
+function isString(test: unknown): test is string {
+    return typeof test === 'string';
+}
+console.log(isString('hello'));
+console.log(isString(42));
+function isPerson(test: unknown): asserts test is Person {
+    if (test == null) {
+        throw new Error('test is null or undefined');
+    }
+    if (
+        typeof (test as Person).name !== 'string' ||
+        typeof (test as Person).age !== 'number'
+    ) {
+        throw new Error('test is not a Person');
+    }
+}
+isPerson({name: 'Alice', age: 22});
+try {
+    isPerson(1)
+} catch (e) {
+    console.log(e);
+} finally {
+    console.log('finally');
+}
