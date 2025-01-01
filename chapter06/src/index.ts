@@ -22,3 +22,11 @@ const mysteryFunc = Math.random() > 0.5 ? getName : getSpecies;
 // console.log(mysteryFunc({name: 'Alice'})); // error
 const both: Human & Animal = {name: 'Alice', species: 'human'};
 console.log(mysteryFunc(both));
+
+// template literal types
+type Greeting = `hello ${number}!`;
+const myStr: Greeting = 'hello 88!';
+console.log(myStr);
+// const myStr2: Greeting = 'hello world!'; // error
+// console.log(myStr2);
+// as const
