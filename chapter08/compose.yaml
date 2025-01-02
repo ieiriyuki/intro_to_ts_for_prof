@@ -1,0 +1,9 @@
+services:
+  app:
+    image: node:16.8.0-bullseye
+    command: ["bash"]
+    working_dir: /app
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/app
