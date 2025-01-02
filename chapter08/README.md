@@ -30,3 +30,27 @@
 ## dynamic import
 - `import(module)`
 - 非同期的読み込み, 遅延評価
+
+## async, await
+```typescript
+async function(args: T): Promise<U>{}
+result = await Promissible
+
+// top level await
+// 関数ではないため async 関数外でも await できる
+await Promissible
+const foo = await Promissible
+export const bar = foo
+
+// error handling
+// await 式でエラーが起こったとする
+async function(args: T): Promise<U>{
+    // foo
+    try {
+        bar = await Promissible
+    } catch (error) {
+        console.log(error)
+    }
+    // baz
+}
+```
