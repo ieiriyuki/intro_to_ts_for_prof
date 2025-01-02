@@ -26,3 +26,7 @@
 - コールバックで throw すると Promise を失敗させることができる
 - 少なくとも最後の Promise のエラーハンドリングをする必要がある
     - しない場合 UnhandledPromiseRejection が起こる
+
+## dynamic import
+- `import(module)`
+- 非同期的読み込み, 遅延評価
