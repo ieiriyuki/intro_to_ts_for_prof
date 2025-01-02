@@ -59,24 +59,22 @@ import { fileURLToPath } from 'url';
 const filePath = fileURLToPath(import.meta.url); // /app/dist/index.js
 const fileDir = path.dirname(filePath);
 const dataFile = path.join(fileDir, '../uhyo.txt');
-const readFileAsyncInTime = async (filepath: string) => {
-    // start time
-    const start = Date.now();
-    // check if processing time is over 1000ms
-    const data = await readFileAsync(filepath, {encoding: 'utf-8'});
-    const end = Date.now();
-    if (end - start > 1) {
-        throw new Error('timeout');
-    }
-    return data;
+const sleep = (duration: number) => {
+    return new Promise<void>((resolve) => {
+        setTimeout(resolve, duration);
+    });
 }
-const data = (
-    await readFileAsyncInTime(dataFile)
-    .then(
-        (data) => data,
-        (err) => { console.log(err); return 'failed to read'; }
-    )
-);
+const errorAfter1ms = async (ms: number) => {
+    await sleep(ms);
+    throw new Error('time out');
+}
+const data = await Promise.race([
+    readFileAsync(dataFile, {encoding: 'utf-8'}),
+    errorAfter1ms(1)
+]).catch((err) => {
+    console.error(err);
+    process.exit(0);
+})
 let count = 0;
 let currentIndex = 0;
 while (true) {
