@@ -50,3 +50,41 @@ const p6 = Promise.any([
     readFile('foo.txt', 'utf-8')
 ]);
 p6.then((data: unknown) => console.log(data));
+
+// challenge
+// to be refactored
+import { readFile as readFileAsync } from 'fs/promises';
+import path from "path";
+import { fileURLToPath } from 'url';
+const filePath = fileURLToPath(import.meta.url); // /app/dist/index.js
+const fileDir = path.dirname(filePath);
+const dataFile = path.join(fileDir, '../uhyo.txt');
+const readFileAsyncInTime = async (filepath: string) => {
+    // start time
+    const start = Date.now();
+    // check if processing time is over 1000ms
+    const data = await readFileAsync(filepath, {encoding: 'utf-8'});
+    const end = Date.now();
+    if (end - start > 1) {
+        throw new Error('timeout');
+    }
+    return data;
+}
+const data = (
+    await readFileAsyncInTime(dataFile)
+    .then(
+        (data) => data,
+        (err) => { console.log(err); return 'failed to read'; }
+    )
+);
+let count = 0;
+let currentIndex = 0;
+while (true) {
+    const nextIndex = data.indexOf('uhyo', currentIndex);
+    if (nextIndex >= 0) {
+        count++;
+        currentIndex = nextIndex + 1;
+    } else {
+        break;
+    }
+}
